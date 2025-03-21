@@ -3,9 +3,16 @@ function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const authLink = document.getElementById('authLink');
     const adminLink = document.getElementById('adminLink');
+    const navLinks = document.getElementById('navLinks');
 
     if (currentUser) {
         // Đã đăng nhập
+        // Thêm lời chào
+        const welcomeText = document.createElement('span');
+        welcomeText.textContent = `Xin chào, ${currentUser.fullname}`;
+        welcomeText.className = 'mr-4 text-yellow-400';
+        navLinks.insertBefore(welcomeText, authLink);
+
         authLink.textContent = 'Đăng xuất';
         authLink.onclick = function(e) {
             e.preventDefault();
@@ -20,6 +27,12 @@ function checkLoginStatus() {
         }
     } else {
         // Chưa đăng nhập
+        // Xóa lời chào nếu có
+        const existingWelcome = navLinks.querySelector('span');
+        if (existingWelcome) {
+            navLinks.removeChild(existingWelcome);
+        }
+
         authLink.textContent = 'Đăng nhập';
         authLink.onclick = null;
         adminLink.style.display = 'none';
