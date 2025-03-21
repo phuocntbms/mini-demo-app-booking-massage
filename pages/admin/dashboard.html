@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Gym Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="mb-8">
+                <h1 class="text-xl font-bold">Admin Dashboard</h1>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700 bg-gray-600">
+                    Quản lý lịch
+                </a>
+                <a href="/" class="block py-2 px-4 rounded hover:bg-gray-700">
+                    Trang chủ
+                </a>
+                <button onclick="logout()" class="w-full text-left py-2 px-4 rounded hover:bg-gray-700 text-red-400">
+                    Đăng xuất
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-4">Thống kê lịch tập</h2>
+                
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold mb-2">Tổng số lịch Gym</h3>
+                        <p class="text-3xl font-bold text-blue-600" id="gymCount">0</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold mb-2">Tổng số lịch Yoga</h3>
+                        <p class="text-3xl font-bold text-green-600" id="yogaCount">0</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold mb-2">Tổng số lịch Zumba</h3>
+                        <p class="text-3xl font-bold text-purple-600" id="zumbaCount">0</p>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <canvas id="scheduleChart"></canvas>
+                </div>
+
+                <!-- Filters -->
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h3 class="text-lg font-semibold mb-4">Bộ lọc</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Lớp học</label>
+                            <select id="classFilter" class="form-input">
+                                <option value="">Tất cả</option>
+                                <option value="Gym">Gym</option>
+                                <option value="Yoga">Yoga</option>
+                                <option value="Zumba">Zumba</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="text" id="emailFilter" class="form-input" placeholder="Tìm theo email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Ngày</label>
+                            <input type="date" id="dateFilter" class="form-input">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schedule Table -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Lớp học</th>
+                                    <th>Ngày tập</th>
+                                    <th>Khung giờ</th>
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleTableBody">
+                                <!-- Schedule data will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination mt-4" id="pagination">
+                    <!-- Pagination buttons will be inserted here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <h2 class="text-xl font-bold mb-4" id="modalTitle">Chỉnh sửa lịch</h2>
+            
+            <form id="bookingForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Lớp học</label>
+                    <select name="class" class="form-input" required>
+                        <option value="">Chọn lớp học</option>
+                        <option value="Gym">Gym</option>
+                        <option value="Yoga">Yoga</option>
+                        <option value="Zumba">Zumba</option>
+                    </select>
+                    <span class="error-message" id="class-error"></span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Ngày tập</label>
+                    <input type="date" name="date" class="form-input" required>
+                    <span class="error-message" id="date-error"></span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Khung giờ</label>
+                    <select name="time" class="form-input" required>
+                        <option value="">Chọn khung giờ</option>
+                        <option value="07:00 - 09:00">07:00 - 09:00</option>
+                        <option value="09:00 - 11:00">09:00 - 11:00</option>
+                        <option value="14:00 - 16:00">14:00 - 16:00</option>
+                        <option value="16:00 - 18:00">16:00 - 18:00</option>
+                        <option value="18:00 - 20:00">18:00 - 20:00</option>
+                    </select>
+                    <span class="error-message" id="time-error"></span>
+                </div>
+
+                <input type="hidden" name="id" id="bookingId">
+                <input type="hidden" name="email" id="bookingEmail">
+                <input type="hidden" name="fullname" id="bookingFullname">
+
+                <div class="flex justify-end space-x-2 mt-4">
+                    <button type="button" onclick="closeBookingModal()" class="btn bg-gray-500 text-white hover:bg-gray-600">
+                        Hủy
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Lưu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-content">
+            <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
+            <p>Bạn có chắc chắn muốn xóa lịch tập này?</p>
+            
+            <div class="flex justify-end space-x-2 mt-4">
+                <button onclick="closeDeleteModal()" class="btn bg-gray-500 text-white hover:bg-gray-600">
+                    Hủy
+                </button>
+                <button onclick="confirmDelete()" class="btn btn-danger">
+                    Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/admin.js"></script>
+</body>
+</html> 

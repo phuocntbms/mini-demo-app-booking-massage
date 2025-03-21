@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold">GYM MANAGEMENT</a>
+            <div class="flex items-center space-x-4" id="navLinks">
+                <a href="/" class="hover:text-gray-300">Trang chủ</a>
+                <a href="/pages/booking/schedule.html" class="hover:text-gray-300">Lịch tập</a>
+                <a href="/pages/admin/dashboard.html" class="hover:text-gray-300" id="adminLink" style="display: none;">Quản lý</a>
+                <a href="/pages/auth/login.html" class="hover:text-gray-300" id="authLink">Đăng nhập</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <div class="relative h-[600px]">
+        <img src="https://bizweb.dktcdn.net/100/011/344/files/tac-dung-cua-yoga.webp?v=1680778752047" 
+             class="w-full h-full object-cover" alt="Gym Banner">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="text-center text-white">
+                <h1 class="text-5xl font-bold mb-4">Welcome to Our Gym</h1>
+                <p class="text-2xl mb-8">Transform Your Body, Transform Your Life</p>
+                <a href="/pages/auth/register.html" 
+                   class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Bắt đầu ngay
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Classes Section -->
+    <div class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">Các lớp học phổ biến</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="classesContainer">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://bizweb.dktcdn.net/100/011/344/files/tac-dung-cua-yoga.webp?v=1680778752047" 
+                     class="w-full h-48 object-cover" alt="Gym Class">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Gym</h3>
+                    <p class="text-gray-600 mb-4">
+                        Tập luyện với các thiết bị hiện đại, được hướng dẫn bởi các huấn luyện viên chuyên nghiệp.
+                    </p>
+                    <a href="/pages/booking/schedule.html" 
+                       class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        Đặt lịch
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://bizweb.dktcdn.net/100/011/344/files/tac-dung-cua-yoga.webp?v=1680778752047" 
+                     class="w-full h-48 object-cover" alt="Yoga Class">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Yoga</h3>
+                    <p class="text-gray-600 mb-4">
+                        Thư giãn và cân bằng tâm trí với các bài tập yoga từ cơ bản đến nâng cao.
+                    </p>
+                    <a href="/pages/booking/schedule.html" 
+                       class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        Đặt lịch
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://bizweb.dktcdn.net/100/011/344/files/tac-dung-cua-yoga.webp?v=1680778752047" 
+                     class="w-full h-48 object-cover" alt="Zumba Class">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Zumba</h3>
+                    <p class="text-gray-600 mb-4">
+                        Đốt cháy calories với những điệu nhảy sôi động và vui nhộn.
+                    </p>
+                    <a href="/pages/booking/schedule.html" 
+                       class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        Đặt lịch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Về chúng tôi</h3>
+                    <p class="text-gray-400">
+                        Gym Management - Nơi bạn bắt đầu hành trình fitness của mình với các trang thiết bị hiện đại 
+                        và đội ngũ huấn luyện viên chuyên nghiệp.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liên hệ</h3>
+                    <p class="text-gray-400">Email: contact@gym.com</p>
+                    <p class="text-gray-400">Phone: (123) 456-7890</p>
+                    <p class="text-gray-400">Địa chỉ: 123 Đường ABC, Quận XYZ</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Theo dõi chúng tôi</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Instagram</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2024 Gym Management. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html> 
