@@ -1,13 +1,11 @@
-gym-management/
+ung_dung_dat_lich_massage/
 ├── assets/
 │   ├── css/
 │   │   └── style.css
-│   ├── js/
-│   │   ├── auth.js
-│   │   ├── booking.js 
-│   │   ├── admin.js
-│   │   └── main.js
-│   └── images/
+│   └── js/
+│       ├── main.js
+│       ├── admin.js
+│       └── booking.js
 ├── pages/
 │   ├── admin/
 │   │   └── dashboard.html
