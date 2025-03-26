@@ -47,29 +47,29 @@ function logout() {
 
 // Khởi tạo dữ liệu mẫu cho các lớp học
 function initializeClasses() {
-    const classes = [
-        {
-            id: 1,
-            name: 'Gym',
-            description: 'Tập luyện với các thiết bị hiện đại',
-            image: 'https://t3.ftcdn.net/jpg/05/62/71/86/360_F_562718625_BM93noP9JDAR8kiBPfRy0h4WTvUwYXNH.jpg'
-        },
-        {
-            id: 2,
-            name: 'Yoga',
-            description: 'Thư giãn và cân bằng tâm trí',
-            image: 'https://static.vecteezy.com/system/resources/previews/023/221/657/non_2x/yoga-day-banner-design-file-vector.jpg'
-        },
-        {
-            id: 3,
-            name: 'Zumba',
-            description: 'Đốt cháy calories với những điệu nhảy sôi động',
-            image: 'https://img.freepik.com/free-psd/zumba-lifestyle-banner-template_23-2149193901.jpg'
-        }
-    ];
-
-    if (!localStorage.getItem('classes')) {
-        localStorage.setItem('classes', JSON.stringify(classes));
+    if (!localStorage.getItem('services')) {
+        // Khởi tạo dữ liệu mẫu nếu chưa có
+        const defaultServices = [
+            {
+                id: '1',
+                name: 'Gym',
+                description: 'Tập luyện với các thiết bị hiện đại',
+                image: 'https://t3.ftcdn.net/jpg/05/62/71/86/360_F_562718625_BM93noP9JDAR8kiBPfRy0h4WTvUwYXNH.jpg'
+            },
+            {
+                id: '2',
+                name: 'Yoga',
+                description: 'Thư giãn và cân bằng tâm trí',
+                image: 'https://static.vecteezy.com/system/resources/previews/023/221/657/non_2x/yoga-day-banner-design-file-vector.jpg'
+            },
+            {
+                id: '3',
+                name: 'Zumba',
+                description: 'Đốt cháy calories với những điệu nhảy sôi động',
+                image: 'https://img.freepik.com/free-psd/zumba-lifestyle-banner-template_23-2149193901.jpg'
+            }
+        ];
+        localStorage.setItem('services', JSON.stringify(defaultServices));
     }
 
     displayClasses();
@@ -77,17 +77,17 @@ function initializeClasses() {
 
 // Hiển thị danh sách lớp học
 function displayClasses() {
-    const classes = JSON.parse(localStorage.getItem('classes'));
+    const services = JSON.parse(localStorage.getItem('services'));
     const container = document.getElementById('classesContainer');
 
-    container.innerHTML = classes.map(classItem => `
+    container.innerHTML = services.map(service => `
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="${classItem.image}" class="w-full h-48 object-cover" alt="${classItem.name}">
+            <img src="${service.image}" class="w-full h-48 object-cover" alt="${service.name}">
             <div class="p-6">
-                <h3 class="text-xl font-bold mb-2">${classItem.name}</h3>
-                <p class="text-gray-600">${classItem.description}</p>
+                <h3 class="text-xl font-bold mb-2">${service.name}</h3>
+                <p class="text-gray-600 mb-4">${service.description}</p>
                 <a href="/pages/booking/schedule.html" 
-                   class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                   class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                     Đặt lịch
                 </a>
             </div>

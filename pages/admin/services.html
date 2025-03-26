@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Dịch vụ - Gym Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="mb-8">
+                <h1 class="text-xl font-bold">Admin Dashboard</h1>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="dashboard.html" class="block py-2 px-4 rounded hover:bg-gray-700">
+                    Quản lý lịch
+                </a>
+                <a href="services.html" class="block py-2 px-4 rounded hover:bg-gray-700 bg-gray-600">
+                    Quản lý dịch vụ
+                </a>
+                <a href="/" class="block py-2 px-4 rounded hover:bg-gray-700">
+                    Trang chủ
+                </a>
+                <button onclick="logout()" class="w-full text-left py-2 px-4 rounded hover:bg-gray-700 text-red-400">
+                    Đăng xuất
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Quản lý Dịch vụ</h2>
+                    <button onclick="openServiceModal()" class="btn btn-primary">
+                        Thêm dịch vụ mới
+                    </button>
+                </div>
+
+                <!-- Services Table -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Tên dịch vụ</th>
+                                <th>Mô tả</th>
+                                <th>Hình ảnh</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="servicesTableBody">
+                            <!-- Services data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Service Modal -->
+    <div class="modal-overlay" id="serviceModal">
+        <div class="modal-content">
+            <h2 class="text-xl font-bold mb-4" id="modalTitle">Thêm dịch vụ mới</h2>
+            
+            <form id="serviceForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tên dịch vụ</label>
+                    <input type="text" name="name" class="form-input" required>
+                    <span class="error-message" id="name-error"></span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Mô tả</label>
+                    <textarea name="description" class="form-input" rows="3" required></textarea>
+                    <span class="error-message" id="description-error"></span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">URL Hình ảnh</label>
+                    <input type="url" name="image" class="form-input" required>
+                    <span class="error-message" id="image-error"></span>
+                </div>
+
+                <input type="hidden" name="id" id="serviceId">
+
+                <div class="flex justify-end space-x-2 mt-4">
+                    <button type="button" onclick="closeServiceModal()" class="btn bg-gray-500 text-white hover:bg-gray-600">
+                        Hủy
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Lưu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-content">
+            <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
+            <p>Bạn có chắc chắn muốn xóa dịch vụ này?</p>
+            
+            <div class="flex justify-end space-x-2 mt-4">
+                <button onclick="closeDeleteModal()" class="btn bg-gray-500 text-white hover:bg-gray-600">
+                    Hủy
+                </button>
+                <button onclick="confirmDelete()" class="btn btn-danger">
+                    Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/services.js"></script>
+</body>
+</html> 
