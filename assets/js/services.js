@@ -148,6 +148,6 @@ function logout() {
 
 // Khởi tạo khi trang load
 document.addEventListener('DOMContentLoaded', () => {
-    checkAdminAuth();
+    //checkAdminAuth();
     displayServices();
 }); 
