@@ -207,7 +207,7 @@ function logout() {
 
 // Khởi tạo khi trang load
 document.addEventListener('DOMContentLoaded', () => {
-    checkAuth();
+    //checkAuth();
     initializeSchedules();
     displaySchedules();
 }); 
